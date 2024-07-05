@@ -1,38 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('#nav-list a');
+    const navLinks = document.querySelectorAll('nav span a');
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault(); 
-            const page = this.getAttribute('data-page');
-            openPage(page); 
+            const href = this.getAttribute('href');
+            openPage(href); 
         });
     });
 
-    
     function openPage(page) {
-        window.open(page, '_blank');
+        window.location.href = page;
     }
 
-    
     createFloatingShapes();
 });
-
 
 function createFloatingShapes() {
     const container = document.querySelector('.floating-shapes');
 
-    for (let i = 0; i < 15; i++) {
-        const shape = document.createElement('div');
-        shape.classList.add('floating-shape');
-        shape.style.backgroundColor = getRandomColor();
-        shape.style.border = `1px solid #fff`; 
-        shape.style.top = `${Math.random() * 100}vh`;
-        shape.style.left = `${Math.random() * 100}vw`;
-        shape.style.animationDuration = `${5 + Math.random() * 10}s`;
-        container.appendChild(shape);
+    if (container) {
+        for (let i = 0; i < 15; i++) {
+            const shape = document.createElement('div');
+            shape.classList.add('floating-shape');
+            shape.style.backgroundColor = getRandomColor();
+            shape.style.border = `1px solid #fff`; 
+            shape.style.top = `${Math.random() * 100}vh`;
+            shape.style.left = `${Math.random() * 100}vw`;
+            shape.style.animationDuration = `${5 + Math.random() * 10}s`;
+            container.appendChild(shape);
+        }
     }
 }
-
 
 function getRandomColor() {
     const r = Math.floor(Math.random() * 256);
